@@ -1,0 +1,29 @@
+/* 프로그래머스 java 난이도 0 대소문자바꿔 출력하기 */
+
+import java.lang.reflect.AnnotatedArrayType;
+import java.util.Arrays;
+
+public class Solution {
+
+	public static void main(String[] args) {
+		
+		String str = "aBcDeFg";
+		String[] arr = str.split(""); //문자열을 배열로 하나씩 집어 넣는다
+		
+		//for문돌려서 대소문자인지 if문을 통해 검증 하고 대문자면 소문자로 바꿔 배열에 다시 추가
+		for(int i = 0; i < str.length(); i++) {
+			if(arr[i].equals(arr[i].toLowerCase())){
+				arr[i] = arr[i].toUpperCase();
+			}else {
+				arr[i] = arr[i].toLowerCase();
+			}
+			
+		}
+		
+		//최종적으로 배열을 다시 문자열로 변환
+		str = String.join("", arr);
+		System.out.println(str);
+		
+	}
+
+}
