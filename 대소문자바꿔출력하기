@@ -17,7 +17,6 @@ public class Solution {
 			}else {
 				arr[i] = arr[i].toLowerCase();
 			}
-			
 		}
 		
 		//최종적으로 배열을 다시 문자열로 변환
