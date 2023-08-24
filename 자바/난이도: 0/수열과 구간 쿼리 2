@@ -1,0 +1,70 @@
+/* 프로그래머스 java 난이도: 0 / 수열과 구간 쿼리 2 / https://school.programmers.co.kr/learn/courses/30/lessons/181923 */
+
+/*
+문제
+정수 배열 arr와 2차원 정수 배열 queries이 주어집니다. queries의 원소는 각각 하나의 query를 나타내며, [s, e, k] 꼴입니다.
+
+각 query마다 순서대로 s ≤ i ≤ e인 모든 i에 대해 k보다 크면서 가장 작은 arr[i]를 찾습니다.
+
+각 쿼리의 순서에 맞게 답을 저장한 배열을 반환하는 solution 함수를 완성해 주세요.
+단, 특정 쿼리의 답이 존재하지 않으면 -1을 저장합니다.
+
+*/
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Solution {
+	
+	public static int[] solution(int[] arr, int[][] queries) {
+	
+		        int[] answer = new int[queries.length];
+
+		        for(int i=0; i < queries.length; i++) {
+		        	//2차배열을 분해해 담을 변수 선언
+		        	int s=0;
+		        	int e=0;
+		        	int k=0;
+		        	
+		        	//2차배열 분해시작해 2차에 저장되어 있는 값을 추출
+		        	for(int y=0; y < queries[i].length; y++) {
+		        		s = queries[i][0];
+		        		e = queries[i][1];
+		        		k = queries[i][2];
+		        	}
+		        	
+		        	//내림차순 정렬을 위해 ArrayList 객체 생성
+		        	List<Integer> list = new ArrayList<Integer>();
+		        	
+		        	//조건에 맞는 값을 추출 후 나온 값을 list에 넣어주기
+		        	for(int x=s; x<=e;x++) {
+		        		if(arr[x]>k) {
+		        			list.add(arr[x]);
+		        		} 
+		        	}
+		        	
+		        	//조건에 나온 값중 작은 값을 찾기 위해 list에 담긴 값을 내림차순으로 정렬
+		        	Collections.sort(list);
+		        	
+		        	//조건에 값이 없어 list안에 담길 값이 없는 경우 문제에 있는것 처럼 -1을 넣어준다
+		        	if(list.isEmpty()) {
+		        		list.add(-1);
+		        	}
+		        	
+		        	//최종 필터링을 걸쳐 나온 값을 answer 배열에 넣어주면 끝
+		        	answer[i] = list.get(0);
+		        	
+		        }
+		        
+		        return answer;
+	}
+	 
+	public static void main(String[] args) {
+		
+		int[] arr = {0, 1, 2, 4, 3};
+		int[][] queries = {{0, 4, 2},{0, 3, 2},{0, 2, 2}};
+		System.out.println(solution(arr,queries)); //3, 4, -1
+	}
+
+}
