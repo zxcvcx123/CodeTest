@@ -42,18 +42,7 @@ public class Solution {
 		        			list.remove(list.size()-1);
 		        			n=-1;	//for 문의 초기 값(n)을 초기화 함으로 써 다시 for문 돌리기
 		        			continue;
-		        		}
-		        	}
-	        	} 
-	        }
-	        
-	        stk = new int[list.size()];
-	       
-	        for(int n=0; n < list.size(); n++) {
-	        	
-	        	stk[n] = list.get(n);
-	        }
-
+		     충
 	        return stk;
 	    }
 	
