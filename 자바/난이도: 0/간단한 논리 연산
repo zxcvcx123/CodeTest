@@ -1,0 +1,45 @@
+/* 프로그래머스 java 난이도: 0 / 간단한 논리 연산 / https://school.programmers.co.kr/learn/courses/30/lessons/181917 */
+
+/*
+문제
+boolean 변수 x1, x2, x3, x4가 매개변수로 주어질 때, 
+다음의 식의 true/false를 return 하는 solution 함수를 작성해 주세요.
+
+(x1 ∨ x2) ∧ (x3 ∨ x4)
+*/
+
+public class Solution {
+	
+	 public static boolean solution(boolean x1, boolean x2, boolean x3, boolean x4) {
+	        boolean answer = true;
+	        
+	        //t t t t = t
+	        //t t t f = t
+	        //t f t f = t
+	        //t f f t = t
+	        //f t t t = t
+	        //f t f t = t
+	        
+	        //t t F F = f
+	        //t f F F = f
+	        //F F F F = f
+	        //F F f t = f
+	        //F F t t = f
+
+	        //모든 경우의 수를 봤을때 x1 x2 두개가 false 이거나 x3 x4 두개가 false 이면 false 가 나옴
+	        if(x1 == false && x2 == false || x3 == false && x4 == false) {
+	        	answer = false;
+	        }
+	        
+	        return answer;
+	    }
+	 
+	
+	public static void main(String[] args) {
+		
+		System.out.println(solution(false, true, true, true)); //true
+		System.out.println(solution(true, false, false, false)); //false
+		
+	}
+	
+}
