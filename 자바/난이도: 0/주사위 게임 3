@@ -1,0 +1,101 @@
+/* 프로그래머스 java 난이도: 0 / 주사위 게임 3 / https://school.programmers.co.kr/learn/courses/30/lessons/120956 */
+
+
+/*
+문제
+
+1부터 6까지 숫자가 적힌 주사위가 네 개 있습니다. 네 주사위를 굴렸을 때 나온 숫자에 따라 다음과 같은 점수를 얻습니다.
+
+네 주사위에서 나온 숫자가 모두 p로 같다면 1111 × p점을 얻습니다.
+세 주사위에서 나온 숫자가 p로 같고 나머지 다른 주사위에서 나온 숫자가 q(p ≠ q)라면 (10 × p + q)2 점을 얻습니다.
+주사위가 두 개씩 같은 값이 나오고, 나온 숫자를 각각 p, q(p ≠ q)라고 한다면 (p + q) × |p - q|점을 얻습니다.
+어느 두 주사위에서 나온 숫자가 p로 같고 나머지 두 주사위에서 나온 숫자가 각각 p와 다른 q, r(q ≠ r)이라면 q × r점을 얻습니다.
+네 주사위에 적힌 숫자가 모두 다르다면 나온 숫자 중 가장 작은 숫자 만큼의 점수를 얻습니다.
+네 주사위를 굴렸을 때 나온 숫자가 정수 매개변수 a, b, c, d로 주어질 때, 얻는 점수를 return 하는 solution 함수를 작성해 주세요.
+
+*/
+
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+
+public class Solution {
+
+	public static int solution(int a, int b, int c, int d) {
+		int answer = 0;
+
+		// 검증에 필요한 list 객체 생성
+		ArrayList<Integer> list = new ArrayList<Integer>();
+
+		// 생성한 list에 매개변수 값 받아서 추가
+		list.add(a);
+		list.add(b);
+		list.add(c);
+		list.add(d);
+
+		// Collections.frequency() 이용해서 특정값이 몇개 중복됐는지 확인
+		// 그리고 그걸 바탕으로 if문 돌려서 조건에 맞게 세팅 후 제출
+		int num1 = Collections.frequency(list, 1);
+		int num2 = Collections.frequency(list, 2);
+		int num3 = Collections.frequency(list, 3);
+		int num4 = Collections.frequency(list, 4);
+		int num5 = Collections.frequency(list, 5);
+		int num6 = Collections.frequency(list, 6);
+		
+		//위에서 확인된 값을 배열로 담는다 (어떤 주사위 값에 몇 번 중복 됐는지 확인하기 위해 ex)0번 인덱스면 1번 주사위)
+		int[] groupNum = {num1, num2, num3, num4, num5, num6};
+		
+
+		//주사위 숫자 / 주사위 숫자에 따른 중복 개수를 넣기 위해 list 객체 생성
+		ArrayList<Integer> juNum = new ArrayList<Integer>();
+		ArrayList<Integer> joongbok = new ArrayList<Integer>();
+		
+		//중복되는수가 없는 애들을 담기 위해 생성 (4개중 3개가 중복이면 나머지 1개가 담기거나 각각 다른 숫자면 여기에 담긴다)
+		ArrayList<Integer> jjeriList = new ArrayList<Integer>();
+
+		// i+1 = 주사위 숫자 / groupNum[i] = 중복된 개수
+		// for문과 조건문을 통해 각 list에 넣어준다
+		for (int i = 0; i < groupNum.length; i++) {
+			if (groupNum[i] == 4) {
+				juNum.add(i + 1);
+				joongbok.add(groupNum[i]);
+				// answer = 1111*(i+1);
+			} else if (groupNum[i] == 3) {
+				juNum.add(i + 1);
+				joongbok.add(groupNum[i]);
+			} else if (groupNum[i] == 2) {
+				juNum.add(i + 1);
+				joongbok.add(groupNum[i]);
+			} else if (groupNum[i] == 1) {
+				jjeriList.add(i + 1);
+			}
+		}
+		
+		//정답 출력
+		if (joongbok.isEmpty()) {
+			answer = Collections.min(jjeriList);
+		} else if (joongbok.get(0) == 4) {
+			answer = 1111 * juNum.get(0);
+		} else if (joongbok.get(0) == 3) {
+			answer = (10 * juNum.get(0) + jjeriList.get(0)) * (10 * juNum.get(0) + jjeriList.get(0));
+		} else if (joongbok.get(0) == 2) {
+			if(joongbok.size()==1) {
+				answer = jjeriList.get(0)*jjeriList.get(1);
+			} else if(joongbok.size()==2){
+				answer = (juNum.get(0) + juNum.get(1)) * Math.abs(juNum.get(0) - juNum.get(1));
+			}
+			
+		}
+
+		return answer;
+
+	}
+
+	public static void main(String[] args) {
+
+		System.out.println(solution(5, 4, 6, 6));
+
+	}
+
+}
