@@ -1,0 +1,51 @@
+/* 프로그래머스 java 난이도: 0 / 간단한 논리 연산 / https://school.programmers.co.kr/learn/courses/30/lessons/181917 */
+
+/*
+문제
+
+문자열 my_string과 이차원 정수 배열 queries가 매개변수로 주어집니다. 
+queries의 원소는 [s, e] 형태로, my_string의 인덱스 s부터 인덱스 e까지를 뒤집으라는 의미입니다. 
+my_string에 queries의 명령을 순서대로 처리한 후의 문자열을 return 하는 solution 함수를 작성해 주세요.
+*/
+
+public class Solution {
+
+	public static String solution(String my_string, int[][] queries) {
+		
+        String answer = my_string;
+        
+        //for each
+        for(int[] query : queries) {
+        	
+        	//for each문으로 []배열안에 [][]배열의 각각 값을 변수로 저장
+			int a = query[0];
+        	int b = query[1];
+        	
+        	//배열안에 있는 범위 만큼 문자열 자르기
+        	String reverse = answer.substring(a, b+1);
+
+        	//글자 뒤집는 reverse StringBuilder 클래스가 필요해 생성
+        	StringBuilder rev = new StringBuilder(reverse);
+        	String revStr = rev.reverse().toString(); //뒤집고 toString() 으로 String 타입으로 변환
+        	
+        	//조건에 맞게 글자 조합
+        	if(a==0) {
+        		answer = revStr + answer.substring(b+1,answer.length());
+        	} else {
+        		answer = answer.substring(0,a) + revStr + answer.substring(b+1,answer.length());
+        	}	
+        	
+        }
+
+        return answer;
+    }
+
+	public static void main(String[] args) {
+		
+		String str = "rermgorpsam";
+		int[][] arr = {{2, 3}, {0, 7}, {5, 9}, {6, 10}};
+		System.out.println(solution(str,arr));
+
+	}
+
+}
