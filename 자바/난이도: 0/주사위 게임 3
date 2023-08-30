@@ -47,9 +47,9 @@ public class Solution {
 		int[] groupNum = {num1, num2, num3, num4, num5, num6};
 		
 
-		//주사위 숫자 / 주사위 숫자에 따른 중복 개수를 넣기 위해 list 객체 생성
-		ArrayList<Integer> juNum = new ArrayList<Integer>();
-		ArrayList<Integer> joongbok = new ArrayList<Integer>();
+		//주사위 숫자와 그 수에 따른 중복 개수를 넣기 위해 list 객체 생성
+		ArrayList<Integer> juNum = new ArrayList<Integer>(); //주사위 숫자
+		ArrayList<Integer> joongbok = new ArrayList<Integer>(); //주사위 숫자에 따른 중복된 수
 		
 		//중복되는수가 없는 애들을 담기 위해 생성 (4개중 3개가 중복이면 나머지 1개가 담기거나 각각 다른 숫자면 여기에 담긴다)
 		ArrayList<Integer> jjeriList = new ArrayList<Integer>();
