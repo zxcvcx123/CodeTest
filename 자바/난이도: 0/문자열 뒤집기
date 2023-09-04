@@ -1,0 +1,50 @@
+/* 프로그래머스 java 난이도: 0 / 문자열 뒤집기 / https://school.programmers.co.kr/learn/courses/30/lessons/181905 */
+
+/*
+문제
+문자열 my_string과 정수 s, e가 매개변수로 주어질 때, 
+my_string에서 인덱스 s부터 인덱스 e까지를 뒤집은 문자열을 return 하는 solution 함수를 작성해 주세요.
+*/
+
+/*
+전에 비슷한거 풀이할 때 reverse()를 사용 했다면 
+이번에는 색다르게 역순으로 문자열을 저장해서 뒤집어 보기
+*/
+
+public class Solution {
+
+	public static String solution(String my_string, int s, int e) {
+		String answer = "";
+		
+		String sliceStr = my_string.substring(s, e+1); //조건대로 잘라서 담을 String 변수 선언
+		String addStr = "";							   //뒤집어서 넣을 변수 선언
+		
+		//for 문이용해서 addStr에 역순으로 넣어 문자열을 뒤집은 형태로 저장
+		for (int i = sliceStr.length() - 1; 0 <= i; i--) {
+			addStr += sliceStr.charAt(i);
+		}
+		
+		//각 조건문을 적용하고 혹시 모를 오류에 대비해 추가적으로 조건문 보충 후 리턴
+		if (s == 0) {
+			if (s == e) {
+				answer = my_string;
+			} else {
+				answer = addStr + my_string.substring(e + 1, my_string.length());
+			}
+		} else if (s != 0) {
+			if (s == e) {
+				answer = my_string;
+			} else {
+				answer = my_string.substring(0, s) + addStr + my_string.substring(e + 1, my_string.length());
+			}
+		}
+
+		return answer;
+	}
+
+	public static void main(String[] args) {
+		System.out.println(solution("Progra21Sremm3", 6, 12)); // ProgrammerS123
+	}
+
+}
+
