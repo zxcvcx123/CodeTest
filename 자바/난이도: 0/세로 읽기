@@ -1,0 +1,40 @@
+/* 프로그래머스 java 난이도: 0 / 세로 읽기 / https://school.programmers.co.kr/learn/courses/30/lessons/181904 */
+
+/*
+문제
+문자열 my_string과 두 정수 m, c가 주어집니다. 
+my_string을 한 줄에 m 글자씩 가로로 적었을 때 
+왼쪽부터 세로로 c번째 열에 적힌 글자들을 문자열로 
+return 하는 solution 함수를 작성해 주세요.
+*/
+
+
+public class Solution {
+
+	public static String solution(String my_string, int m, int c) {
+        String answer = "";
+        
+        //substring 위치 잡아줄 값을 변수로 선언
+        int start = 0;
+        int end = m;
+        
+        //반복문 횟수 => my_string의 길이 / m 
+        int forIndex = my_string.length() / m;
+        
+        //for문 돌려서 substring 된걸 str 변수에 넣고 m 개씩 나뉜 str을 c 인덱스에 있는 단어를 answer에 추가
+        //그리고 substring 위치 바꿔주기
+        for(int i=0; i < forIndex; i++) {
+        	String str = my_string.substring(start, end);   //m 개씩 substring 결과값 str에 넣기
+        	answer += Character.toString(str.charAt(c-1));  //m 개씩 나뉜 str을 c 인덱스에 있는 문자열 추출 후 answer 값에 추가
+        	start += m;										//substring 값 위치 변경
+        	end += m;										//substring 값 위치 변경
+        }
+        
+        return answer;
+    }
+
+	public static void main(String[] args) {
+		System.out.println(solution("ihrhbakrfpndopljhygc", 4, 2)); // happy
+	}
+
+}
