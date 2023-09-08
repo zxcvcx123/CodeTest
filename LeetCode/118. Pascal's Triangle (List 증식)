@@ -1,0 +1,39 @@
+https://leetcode.com/problems/pascals-triangle/?envType=daily-question&envId=2023-09-08
+
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+
+	public static List<List<Integer>> generate(int numRows) {
+		
+		List<List<Integer>> res = new ArrayList<>();
+		List<Integer> firstRow = List.of(1);
+		res.add(firstRow);
+		
+		List<Integer> prevRow = firstRow;
+		for (int c = 1; c < numRows; c++) {
+			List<Integer> nextRow = new ArrayList<Integer>();
+
+			nextRow.add(1);
+
+			for (int i = 0; i < prevRow.size() - 1; i++) {
+
+				nextRow.add(prevRow.get(i) + prevRow.get(i + 1));
+			}
+			
+			nextRow.add(1);
+			res.add(nextRow);
+			prevRow = nextRow;
+		}
+
+		return res;
+	}
+
+	public static void main(String[] args) {
+
+		System.out.println(generate(5));
+	}
+
+}
