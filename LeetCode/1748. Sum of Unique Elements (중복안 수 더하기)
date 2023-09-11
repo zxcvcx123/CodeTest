@@ -1,0 +1,40 @@
+/* https://leetcode.com/problems/sum-of-unique-elements/description/ */
+
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+
+	public static int sumOfUnique(int[] nums) {
+
+		int answer = 0;
+
+		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+
+		for (int num : nums) {
+			if (map.containsKey(num)) {
+				//이미 있으면
+				int oldValue = map.get(num);
+				map.put(num, oldValue + 1);
+			} else {
+				map.put(num, 1);// 첫발견
+			}
+		}
+		
+		for(Map.Entry<Integer, Integer> entry:map.entrySet()) {
+			if(entry.getValue().equals(1)) {
+				answer += entry.getKey();
+			}
+		}
+
+		return answer;
+	}
+
+	public static void main(String[] args) {
+
+		int[] nums = { 1, 2, 3, 2 };
+		System.out.println(sumOfUnique(nums));
+	}
+
+}
