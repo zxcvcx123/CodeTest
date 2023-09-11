@@ -1,0 +1,54 @@
+/* https://leetcode.com/problems/number-of-good-pairs/description/ */
+
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+
+	public static int numIdenticalPairs(int[] nums) {
+		
+		int answer = 0;
+
+    //Map으로 풀어보기
+		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+
+    //key 값의 배열의 중복되지 않는 수 넣고 value의 몇 번 중복 됐는지 넣기
+		for(Integer num : nums) {
+      //key가 중복되면 value 값의 +1 해서 몇 번 중복 됐는지 확인
+			if(map.containsKey(num)) {
+				int oldVal = map.get(num);
+				map.put(num, oldVal+1);
+			} else {
+        //중복 안됐으면 1
+				map.put(num, 1);
+			}	
+		}
+
+    //만들어진 map을 이용해 Map.Entry로 전체 key와 value 탐색
+		for(Map.Entry<Integer, Integer> entry : map.entrySet()) {
+
+      //계산
+			for(int i=0; i<= entry.getValue(); i++) {
+				answer += i;
+			} 
+			answer -= entry.getValue();
+		}
+
+    //계산식 : n = key / r = value (반복된 횟수)
+    //(0~r)-r 0~r 까지 더한 후 r 빼기
+    //n = 1 / r = 3  //(0+1+2+3)-3 = 3
+    //n = 2 / r = 1 //(0+1)-1 = 0
+    //n = 3 / r = 2 //(0+1+2)-2 = 1 
+		return answer;
+	}
+
+	public static void main(String[] args) {
+
+		int[] nums = { 1, 2, 3, 1, 1, 3 };
+		
+		System.out.println(numIdenticalPairs(nums));
+
+	}
+
+}
