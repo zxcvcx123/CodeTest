@@ -1,0 +1,35 @@
+/* https://leetcode.com/problems/jewels-and-stones/submissions/ */
+
+
+
+import java.util.HashSet;
+import java.util.Set;
+
+public class Solution {
+
+	public static int numJewelsInStones(String jewels, String stones) {
+
+		int num = 0;
+
+		Set<Character> set = new HashSet<Character>();
+
+    //for each문으로 각 글자를 char 단위로 쪼개서 서로 맞으면 num +1
+		for (char c : jewels.toCharArray()) {
+			for (char ch : stones.toCharArray()) {
+				if (c == ch) {
+					num += 1;
+				}
+			}
+		}
+
+		return num;
+	}
+
+	public static void main(String[] args) {
+
+		String stones = "a,A,A,b,b,b,b";
+
+		System.out.println(numJewelsInStones("aA", stones));
+	}
+
+}
