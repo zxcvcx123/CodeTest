@@ -1,0 +1,71 @@
+/* https://leetcode.com/problems/backspace-string-compare/description/ */
+
+
+import java.util.Stack;
+
+public class Solution {
+
+	public static boolean backspaceCompare(String s, String t) {
+		boolean answer = true;
+
+    //Stack 으로 풀이
+		Stack<String> stack1 = new Stack<>();
+
+    //문자열 하나씩 char로 분해시키고 String으로 다시 형변환해서 순서대로 넣기
+    //#을 처음 만난경우 뺄 데이터가 없으니 push 하고 데이터가 있는경우 pop
+		for(int i=0; i<s.length(); i++) {
+			String str = String.valueOf(s.charAt(i));
+			if(str.equals("#")) {
+				if(stack1.size() == 0) {
+					stack1.push(str);
+				}
+				stack1.pop();
+			} else {
+				stack1.push(str);
+			}
+		}
+
+    //stack1에 있는 데이터를 str1에 담기 위해 변수 생성
+    String str1 = "";
+
+    //stack1 -> str1 로 데이터 넣기
+		for(String str : stack1) {
+			str1 += str;
+		}
+
+    //똑같은 작업 반복
+		Stack<String> stack2 = new Stack<>();
+		
+		for(int i=0; i<t.length(); i++) {
+			String str = String.valueOf(t.charAt(i));
+			if(str.equals("#")) {
+				if(stack2.size() == 0) {
+					stack2.push(str);
+				}
+				stack2.pop();
+			} else {
+				stack2.push(str);
+			}
+		}
+
+		String str2 = "";
+
+		for(String str : stack2) {
+			str2 += str;
+		}
+
+    //최종적으로 같은 문자열인지 확인후 리턴
+		if(str1.equals(str2)) {
+			return answer;
+		} else {
+			return answer = false;
+		}
+		
+	}
+
+	public static void main(String[] args) {
+
+		System.out.println(backspaceCompare("a##c", "#a#c"));
+	}
+
+}
