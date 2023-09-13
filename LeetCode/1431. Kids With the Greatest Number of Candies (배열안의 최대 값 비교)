@@ -1,0 +1,36 @@
+https://leetcode.com/problems/kids-with-the-greatest-number-of-candies/
+
+/*문제*/
+/*
+배열의 원소 값들을 extraCandies랑 더해서
+배열의 원소의 최댓값 보다 크거나 같으면 true 낮으면 false
+*/
+
+
+import java.util.Arrays;
+import java.util.List;
+
+public class Solution {
+
+	public static List<Boolean> kidsWithCandies(int[] candies, int extraCandies) {
+
+		// stream으로 풀이
+		int max = Arrays.stream(candies) // 배열을 stream 형태로 변경
+				.max()					 // max로 최대 값 구하고
+				.getAsInt();		 // int형으로 변환 리턴
+
+		return Arrays.stream(candies)		// 배열을 stream으로 변환
+				.map(c -> c + extraCandies) // map 메소드를 통해 candies 원소들과 extraCandies를 더해주고
+				.mapToObj(c -> c >= max)    // mapToObj를 사용한 이유는 boolean 타입으로 변환이 없어서 조건을 true, false 반환
+				.toList();					        // 반환된 값들을 리스트형태로 리턴
+
+	}
+
+	public static void main(String[] args) {
+
+		int[] candies = { 2, 3, 5, 1, 3 };
+		System.out.println(kidsWithCandies(candies, 3));
+
+	}
+
+}
