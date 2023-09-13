@@ -41,6 +41,20 @@ public class Solution {
 		    //n = 2 / r = 1 //(0+1)-1 = 0
 		    //n = 3 / r = 2 //(0+1+2)-2 = 1 
 		return answer;
+
+		//stream 풀이
+/*
+		Map<Integer, Long> collect = Arrays.stream(nums)
+                .boxed()
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+
+
+	        return collect.values().stream()
+	                .map(e-> (e) * (e-1)/2)
+	                .mapToInt(e->e.intValue())
+	                .sum();
+*/
 	}
 
 	public static void main(String[] args) {
