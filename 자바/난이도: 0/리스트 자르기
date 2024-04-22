@@ -12,3 +12,144 @@ n = 4 : num_list의 a번 인덱스부터 b번 인덱스까지 c 간격으로
 
 */
 
+public class Programmers{
+	
+	public static int[] solution(int n, int[] slicer, int[] num_list) {
+		
+      int[] answer = {};
+			int start = slicer[0]; // 시작 위치 설정
+			int end = slicer[1];   // 종료 위치 설정
+			int jump = slicer[2];  // 간격 설정
+			
+			// 1번으로 들어온 경우
+			if (n == 1) {
+				
+				// 리스트 생성
+				List<Integer> list1 = new ArrayList<Integer>();
+				
+				// for문으로 배열에 있는 값을 1번 조건에 맞춰 list로 옮기기
+				for (int i = 0; i <= end; i++) {
+					list1.add(num_list[i]);
+				}
+				
+				// 다시 배열로 리턴해야해서 사이즈에 맞게 재생성
+				answer = new int[list1.size()];
+				
+				// for문으로 1번 조건에 맞춘 list를 배열로 다시 옮기기
+				for (int i = 0; i < list1.size(); i++) {
+					answer[i] += list1.get(i);
+				}
+
+
+			}
+			
+			// 2번으로 들어온 경우
+			if (n == 2) {
+				
+				// 리스트 생성
+				List<Integer> list2 = new ArrayList<Integer>();
+				
+				// for문으로 배열에 있는 값을 2번 조건에 맞춰 list로 옮기기
+				for (int i = start; i < num_list.length; i++) {
+					list2.add(num_list[i]);
+				}
+				
+				// 다시 배열로 리턴해야해서 사이즈에 맞게 재생성
+				answer = new int[list2.size()];
+				
+				// for문으로 2번 조건에 맞춘 list를 배열로 다시 옮기기
+				for (int i = 0; i < list2.size(); i++) {
+					answer[i] += list2.get(i);
+				}
+				
+
+				
+			}
+			
+			// 3번으로 들어온 경우
+			if (n == 3) {
+				
+				// 리스트 생성
+				List<Integer> list3 = new ArrayList<Integer>();
+				
+				// for문으로 배열에 있는 값을 3번 조건에 맞춰 list로 옮기기
+				for (int i = start; i <= end; i++) {
+					list3.add(num_list[i]);
+				}
+				
+				// 다시 배열로 리턴해야해서 사이즈에 맞게 재생성
+				answer = new int[list3.size()];
+				
+				// for문으로 배열에 있는 값을 3번 조건에 맞춰 list로 옮기기
+				for (int i = 0; i < list3.size(); i++) {
+					answer[i] += list3.get(i);
+				}
+
+
+
+			}
+			
+			// 4번으로 들어온 경우
+			if (n == 4) {
+				
+				// 리스트 2개 생성 이유는 있다가
+				List<Integer> list4 = new ArrayList<Integer>();
+				List<Integer> list5 = new ArrayList<Integer>();
+				
+				// for문으로 배열에 있는 값을 4번 조건에 맞춰 list로 옮기기
+				for (int i = start; i <= end; i++) {
+					list4.add(num_list[i]);
+				}
+				
+				// 4번 조건은 간격 조건이 있음
+				// 2칸인 경우 => jump 값이 2로 들어왔을 때 2칸 간격 0,1 => 1번 인덱스 값만 사용 / 2,3 => 3번 인덱스 값만 사용
+				// for문의 값이 0으로 시작해서 jump(간격) 들어온 값의 -1 해서 현재 위치를 설정
+				int pos = jump-1;
+				
+				// for문시작
+				for (int i = 0; i < list4.size(); i++) {
+					
+					// 위치 값을 통해 필요한 데이터만 list5 리스트에 넣어주기
+					if(pos == i || (pos+jump) == i) {
+						
+						// 위치를 계속 업데이트 해줘야 하기 때문에 조건에 맞는 경우 i => 현재 위치의 값을 pos에 기입
+						// 그러면 위치를 계속 업데이트 시킴
+						pos = i;
+					} else {
+						// 값 넣어주기
+						list5.add(list4.get(i));
+					}
+					
+				}
+				
+				// 최종 답을 위한 배열을 사이즈에 맞게 재생성
+				answer = new int[list5.size()];
+				
+				// 4번 조건에 맞는 list5를 배열에 담아주기
+				for(int i = 0; i < list5.size(); i++) {
+					answer[i] += list5.get(i);
+				}
+				
+			}
+			
+			// 잘 들어갔는지 확인용
+			for(int i = 0; i < answer.length; i++) {
+				System.out.println(answer[i]);
+			}
+		
+		
+			return answer;
+	    }
+	
+	public static void main(String[] args) {
+		
+		int[] slicer = {1,5,2};
+		int[] num_list = {1,2,3,4,5,6,7,8,9};
+		int n = 4;
+		
+		
+		solution(n, slicer, num_list);
+
+		
+	}
+}
