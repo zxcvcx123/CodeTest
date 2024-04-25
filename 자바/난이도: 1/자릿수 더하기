@@ -1,0 +1,51 @@
+/*  프로그래머스 java 난이도: 1 / 자릿수 더하기 / https://school.programmers.co.kr/learn/courses/30/lessons/12931 */
+
+/*
+문제
+
+자연수 N이 주어지면, N의 각 자릿수의 합을 구해서 return 하는 solution 함수를 만들어 주세요.
+예를들어 N = 123이면 1 + 2 + 3 = 6을 return 하면 됩니다.
+
+제한사항
+N의 범위 : 100,000,000 이하의 자연수
+
+*/
+
+
+
+
+public class Programmers{
+	
+	public static int solution(int n) {
+        int answer = 0;
+
+        String num = String.valueOf(n);
+        
+        // substring 앞에 위치 값 잡아주기 용도
+        int pos = 0;
+        
+        // for문으로 타입변환하면서 answer에 값 더하기
+        for(int i = 1; i <= num.length(); i++) {
+        	
+        	answer += Integer.valueOf(num.substring(pos, i));
+        	
+        	// 위치 이동시키기
+        	pos++;
+        	
+        }
+        
+        System.out.println(answer);
+        
+        return answer;
+    }
+	
+	public static void main(String[] args) {
+		
+		int n = 123;
+		
+		solution(n);
+
+		
+	}
+	
+}
