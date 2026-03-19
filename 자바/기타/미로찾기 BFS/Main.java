@@ -72,7 +72,7 @@ public class Main {
             }
 
             if (!isEnd && !moved && !oldLoad.isEmpty()) {
-                // 사방이 막혀있으면 되돌아가기
+                // 사방이 막혀있으면 되돌아가기 (벽 + 이미 왔던 길)
                 int[] backload = oldLoad.pop();
                 int by = backload[0];
                 int bx = backload[1];
